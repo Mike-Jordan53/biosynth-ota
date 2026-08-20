@@ -3,6 +3,14 @@ Proyecto: Bio-Guitar Geometric Synth (Planta Musical)
 
 Todas las actualizaciones notables de este proyecto se documentarán en este archivo. El formato está basado en los estándares de control de versiones de la industria (Keep a Changelog).
 
+## [v12] - Versión E0.4 - MULTI-WIFI Y WATCHDOG FRONTEND
+### Añadido
+- **Libreta Multi-WiFi:** Se implementó la librería `<WiFiMulti.h>`. El ESP32 ahora guarda en su memoria interna (`Preferences`) hasta 3 redes WiFi distintas y se conecta automáticamente a la que esté disponible sin lanzar el portal cautivo.
+- **Watchdog (Perro Guardián) de Red:** Se añadió un temporizador JavaScript que monitorea el último paquete WebSocket recibido. Si pasan más de 2 segundos sin datos, declara la caída de red de inmediato, cambiando la UI a "RECONECTANDO..." y apagando el sonido.
+
+### Corregido
+- **Bug de Canal Derecho Congelado:** Se corrigió el evento `websocket.onclose` para que al perder la conexión, ambos canales (izquierdo y derecho) se reinicien visualmente a `-- V` y `-- Hz`, evitando que el canal derecho se quede trabado mostrando valores viejos.
+
 ## [v11] - Versión E0.3 - MIGRACIÓN A WEBSOCKETS
 ### Añadido
 - **WebSocketsServer:** Se implementó comunicación persistente bidireccional en el puerto 81 (`<WebSocketsServer.h>`), reemplazando el antiguo método de HTTP Polling (`fetch()`).
